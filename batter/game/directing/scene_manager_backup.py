@@ -2,7 +2,6 @@ import csv
 from constants import *
 from game.casting.animation import Animation
 from game.casting.ball import Ball
-from game.casting.background import Background
 from game.casting.body import Body
 from game.casting.brick import Brick
 from game.casting.image import Image
@@ -17,7 +16,6 @@ from game.scripting.collide_borders_action import CollideBordersAction
 from game.scripting.collide_brick_action import CollideBrickAction
 from game.scripting.collide_racket_action import CollideRacketAction
 from game.scripting.control_racket_action import ControlRacketAction
-from game.scripting.draw_background_action import DrawBackgroundAction
 from game.scripting.draw_ball_action import DrawBallAction
 from game.scripting.draw_bricks_action import DrawBricksAction
 from game.scripting.draw_dialog_action import DrawDialogAction
@@ -46,7 +44,6 @@ class SceneManager:
     KEYBOARD_SERVICE = RaylibKeyboardService()
     PHYSICS_SERVICE = RaylibPhysicsService()
     VIDEO_SERVICE = RaylibVideoService(GAME_NAME, SCREEN_WIDTH, SCREEN_HEIGHT)
-    BACKGROUND_SERVICE = DrawBackgroundAction(VIDEO_SERVICE)
 
     CHECK_OVER_ACTION = CheckOverAction()
     COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS_SERVICE, AUDIO_SERVICE)
@@ -91,7 +88,6 @@ class SceneManager:
         self._add_level(cast)
         self._add_lives(cast)
         self._add_score(cast)
-        self._add_background(cast)
         self._add_ball(cast)
         self._add_bricks(cast)
         self._add_racket(cast)
@@ -106,7 +102,6 @@ class SceneManager:
         self._add_release_script(script)
         
     def _prepare_next_level(self, cast, script):
-        self._add_background(cast)
         self._add_ball(cast)
         self._add_bricks(cast)
         self._add_racket(cast)
@@ -118,7 +113,6 @@ class SceneManager:
         script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, WELCOME_SOUND))
         
     def _prepare_try_again(self, cast, script):
-        self._add_background(cast)
         self._add_ball(cast)
         self._add_racket(cast)
         self._add_dialog(cast, PREP_TO_LAUNCH)
@@ -138,7 +132,6 @@ class SceneManager:
         self._add_output_script(script)
 
     def _prepare_game_over(self, cast, script):
-        self._add_background(cast)
         self._add_ball(cast)
         self._add_racket(cast)
         self._add_dialog(cast, WAS_GOOD_GAME)
@@ -167,18 +160,6 @@ class SceneManager:
         image = Image(BALL_IMAGE)
         ball = Ball(body, image, True)
         cast.add_actor(BALL_GROUP, ball)
-
-    def _add_background(self, cast):
-        cast.clear_actors(BACKGROUND_GROUP)
-        x = 20
-        y = 80
-        position = Point(x, y)
-        size = Point(BACKGROUND_WIDTH, BACKGROUND_HEIGHT)
-        velocity = Point(0, 0)
-        body = Body(position, size, velocity)
-        image = Image(BACKGROUND_IMAGE)
-        background = Background(body, image, True)
-        cast.add_actor(BACKGROUND_GROUP, background)
 
     def _add_bricks(self, cast):
         cast.clear_actors(BRICK_GROUP)
@@ -272,7 +253,6 @@ class SceneManager:
     def _add_output_script(self, script):
         script.clear_actions(OUTPUT)
         script.add_action(OUTPUT, self.START_DRAWING_ACTION)
-        script.add_action(OUTPUT, self.BACKGROUND_SERVICE)
         script.add_action(OUTPUT, self.DRAW_HUD_ACTION)
         script.add_action(OUTPUT, self.DRAW_BALL_ACTION)
         script.add_action(OUTPUT, self.DRAW_BRICKS_ACTION)

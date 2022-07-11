@@ -10,12 +10,11 @@ from game.services.video_service import VideoService
 class RaylibVideoService(VideoService):
     """ A Raylib implementation of VideoService."""
 
-    def __init__(self, title = "", width = 640, height = 480, background = BG, color = BLACK):
+    def __init__(self, title = "", width = 640, height = 480, color = BLACK):
         self._title = title
         self._width = width
         self._height = height
         self._color = color
-        self._background = background
         self._fonts = {}
         self._textures = {}
         
@@ -25,19 +24,6 @@ class RaylibVideoService(VideoService):
         pyray.clear_background(raylib_color)
 
     def draw_image(self, image, position):
-        filepath = image.get_filename()
-        # fixed os dependent filepath
-        filepath = str(pathlib.Path(filepath))
-        texture = self._textures[filepath]
-        x = position.get_x()
-        y = position.get_y()
-        raylib_position = pyray.Vector2(x, y)
-        scale = image.get_scale()
-        rotation = image.get_rotation()
-        tint = self._to_raylib_color(Color(255,255,255)) 
-        pyray.draw_texture_ex(texture, raylib_position, rotation, scale, tint)
-
-    def draw_background(self, image, position):
         filepath = image.get_filename()
         # fixed os dependent filepath
         filepath = str(pathlib.Path(filepath))

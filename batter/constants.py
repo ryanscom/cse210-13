@@ -40,13 +40,6 @@ ALIGN_RIGHT = 2
 BLACK = Color(0, 0, 0)
 WHITE = Color(255, 255, 255)
 PURPLE = Color(255, 0, 255)
-RED = Color(255, 0, 0)
-YELLOW = Color(255, 255, 0)
-GREEN = Color(0, 255, 0)
-BLUE = Color(0, 0, 255)
-
-# BACKGROUND
-BG = "batter/assets/background/dark_city.jpg"
 
 # KEYS
 LEFT = "left"
@@ -85,8 +78,8 @@ RELEASE = 6
 
 # STATS
 STATS_GROUP = "stats"
-DEFAULT_LIVES = 20
-MAXIMUM_LIVES = 25
+DEFAULT_LIVES = 3
+MAXIMUM_LIVES = 5
 
 # HUD
 HUD_MARGIN = 15
@@ -103,6 +96,12 @@ BALL_IMAGE = "batter/assets/images/000.png"
 BALL_WIDTH = 28
 BALL_HEIGHT = 28
 BALL_VELOCITY = 6
+
+# BACKGROUND
+BACKGROUND_GROUP = "Background"
+BACKGROUND_WIDTH = "1040"
+BACKGROUND_HEIGHT = "680"
+BACKGROUND_IMAGE = "batter/assets/images/dark_city.png"
 
 # RACKET
 RACKET_GROUP = "rackets"
