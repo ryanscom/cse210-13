@@ -106,8 +106,8 @@ BACKGROUND_IMAGE = "batter/assets/images/dark_city.png"
 # RACKET
 RACKET_GROUP = "rackets"
 RACKET_IMAGES = [f"batter/assets/images/{n:03}.png" for n in range(100, 103)]
-RACKET_WIDTH = 106
-RACKET_HEIGHT = 28
+RACKET_WIDTH = 100
+RACKET_HEIGHT = 100
 RACKET_RATE = 6
 RACKET_VELOCITY = 7
 
